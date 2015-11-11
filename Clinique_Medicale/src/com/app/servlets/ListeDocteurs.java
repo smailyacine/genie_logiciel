@@ -11,13 +11,15 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 import java.util.HashMap;
 
-import com.app.beans.Patient;
-import com.app.forms.CreationPatientForm;
+import com.app.beans.Docteur;
+import com.app.forms.CreationDocteurForm;
 
 public class ListeDocteurs extends HttpServlet {
-    public static final String ATT_PATIENT = "docteur";
+
+	private static final long serialVersionUID = 1L;
+	public static final String ATT_PATIENT = "docteur";
     public static final String ATT_FORM   = "form";
-    public static final String ATT_SESSION_PATIENT = "docteurs";
+    public static final String ATT_SESSION_PATIENT = "docteur";
     public static final String VUE = "/WEB-INF/listerDocteurs.jsp";
 
 

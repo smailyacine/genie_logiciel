@@ -14,7 +14,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>ListePatients</servlet-name>
-    <url-pattern>/listerPatients</url-pattern>
+    <url-pattern>/listePatients</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>CreationDocteur</servlet-name>
@@ -23,5 +23,13 @@
   <servlet-mapping>
     <servlet-name>CreationDocteur</servlet-name>
     <url-pattern>/creationDocteur</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>ListeDocteurs</servlet-name>
+    <servlet-class>com.app.servlets.ListeDocteurs</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeDocteurs</servlet-name>
+    <url-pattern>/listeDocteurs</url-pattern>
   </servlet-mapping>
 </web-app>

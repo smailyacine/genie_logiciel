@@ -15,7 +15,7 @@ import com.app.beans.Patient;
 import com.app.forms.CreationPatientForm;
 
 public class ListePatients extends HttpServlet {
-    public static final String ATT_PATIENT = "client";
+    public static final String ATT_PATIENT = "patient";
     public static final String ATT_FORM   = "form";
     public static final String ATT_SESSION_PATIENT = "patient";
     public static final String VUE = "/WEB-INF/listerPatients.jsp";

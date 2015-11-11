@@ -70,7 +70,4 @@ public class Docteur {
 		this.identifiant = identifiant;
 	}
 	 
-	
-	
-
 }
