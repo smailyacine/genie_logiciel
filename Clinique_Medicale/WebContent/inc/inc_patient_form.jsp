@@ -24,3 +24,8 @@
 <input type="email" id="emailPatient" name="emailPatient" value="<c:out value="${patient.email}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.erreurs['emailPatient']}</span>
 <br />
+
+<label for="imagePatient">Upploader une image <span class="requis">*</span></label>
+<input type="file" id="imagePatient" name="imagePatient"  />
+<span class="erreur">${form.erreurs['imagePatient']}</span>
+<br />

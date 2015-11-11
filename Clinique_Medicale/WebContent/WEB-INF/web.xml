@@ -9,6 +9,14 @@
     <url-pattern>/creationPatient</url-pattern>
   </servlet-mapping>
   <servlet>
+    <servlet-name>ConnexionDocteur</servlet-name>
+    <servlet-class>com.app.servlets.ConnexionDocteur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConnexionDocteur</servlet-name>
+    <url-pattern>/connexionDocteur</url-pattern>
+  </servlet-mapping>  
+  <servlet>
     <servlet-name>ListePatients</servlet-name>
     <servlet-class>com.app.servlets.ListePatients</servlet-class>
   </servlet>
@@ -24,7 +32,7 @@
     <servlet-name>CreationDocteur</servlet-name>
     <url-pattern>/creationDocteur</url-pattern>
   </servlet-mapping>
-    <servlet>
+  <servlet>
     <servlet-name>ListeDocteurs</servlet-name>
     <servlet-class>com.app.servlets.ListeDocteurs</servlet-class>
   </servlet>

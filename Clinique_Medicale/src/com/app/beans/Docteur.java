@@ -12,7 +12,7 @@ public class Docteur {
 	 private String email;
 	 private String sexe;
 	 private int num_assurance;
-	 
+	 private String motDePasse;
 	 
 	public String getNom() {
 		return nom;
@@ -68,6 +68,10 @@ public class Docteur {
 	}
 	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
+	}
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse=motDePasse;
+		
 	}
 	 
 }
