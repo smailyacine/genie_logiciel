@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import com.app.beans.Patient;
 import com.app.forms.CreationPatientForm;
+import com.app.dao.DAOFactory;
+import com.app.dao.PatientDao;
 
 
 public class CreationPatient extends HttpServlet {
@@ -22,7 +24,13 @@ public class CreationPatient extends HttpServlet {
 
     public static final String VUE_SUCCES      = "/WEB-INF/afficherPatient.jsp";
     public static final String VUE_FORM        = "/WEB-INF/creerPatient.jsp";
-
+    public static final String CONF_DAO_FACTORY= "daofactory";
+	private PatientDao patientDao;
+    
+    public void init() throws ServletException {
+    	/* Récupération d'une instance de notre DAO Utilisateur */
+    	this.patientDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getPatientDao();
+    	}
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* À la réception d'une requête GET, simple affichage du formulaire */
         this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
@@ -30,7 +38,7 @@ public class CreationPatient extends HttpServlet {
     
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Préparation de l'objet formulaire */
-        CreationPatientForm form = new CreationPatientForm();
+        CreationPatientForm form = new CreationPatientForm(patientDao);
 
         /* Traitement de la requête et récupération du bean en résultant */
         Patient patient = form.creerPatient( request );

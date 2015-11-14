@@ -2,7 +2,7 @@ package com.app.beans;
 
 public class Patient {
 	
-	
+	 private Long ID;
 	 private String nom;
 	 private String prenom;
 	 private String adresse;
@@ -67,6 +67,12 @@ public class Patient {
 	}
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+	public Long getID() {
+		return ID;
+	}
+	public void setID(Long iD) {
+		ID = iD;
 	}
 	 
 	

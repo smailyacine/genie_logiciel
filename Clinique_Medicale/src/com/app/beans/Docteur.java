@@ -4,24 +4,27 @@ public class Docteur {
 	
 	
 	 private long   id;
-	 private String identifiant;
+	 private int identifiant;
 	 private String nom;
 	 private String prenom;
 	 private String adresse;
 	 private String telephone;
 	 private String email;
-	 private String sexe;
-	 private int num_assurance;
 	 private String motDePasse;
-	 
-	public String getNom() {
-		return nom;
-	}
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
+	}
+	public int getIdentifiant() {
+		return identifiant;
+	}
+	public void setIdentifiant(int identifiant) {
+		this.identifiant = identifiant;
+	}
+	public String getNom() {
+		return nom;
 	}
 	public void setNom(String nom) {
 		this.nom = nom;
@@ -38,19 +41,6 @@ public class Docteur {
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-
-	public String getSexe() {
-		return sexe;
-	}
-	public void setSexe(String sexe) {
-		this.sexe = sexe;
-	}
-	public int getNum_assurance() {
-		return num_assurance;
-	}
-	public void setNum_assurance(int num_assurance) {
-		this.num_assurance = num_assurance;
-	}
 	public String getTelephone() {
 		return telephone;
 	}
@@ -63,15 +53,12 @@ public class Docteur {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getIdentifiant() {
-		return identifiant;
-	}
-	public void setIdentifiant(String identifiant) {
-		this.identifiant = identifiant;
+	public String getMotDePasse() {
+		return motDePasse;
 	}
 	public void setMotDePasse(String motDePasse) {
-		this.motDePasse=motDePasse;
-		
+		this.motDePasse = motDePasse;
 	}
 	 
+	
 }

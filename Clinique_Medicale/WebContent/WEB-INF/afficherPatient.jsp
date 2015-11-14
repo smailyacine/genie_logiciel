@@ -10,7 +10,6 @@
     <body>
         <div id="corps">
             <p class="info">${ message }</p>
-            <c:if test="${ !erreur }">
                 <p>Nom : <c:out value="${ patient.nom }"/></p>
                 <p>Prénom : <c:out value="${ patient.prenom }"/></p>
                 <p>Adresse : <c:out value="${ patient.adresse }"/></p>
@@ -21,7 +20,6 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${patient.email}</p>
                 </c:if>
-            </c:if>
             
         </div>
     </body>
