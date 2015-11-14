@@ -22,7 +22,7 @@ public final class ConnexionDocteurForm {
 	}
 
 	public Docteur connecterDocteur(HttpServletRequest request) {
-		/* Récupération des champs du formulaire */
+		/* Rï¿½cupï¿½ration des champs du formulaire */
 		String email = getValeurChamp(request, CHAMP_EMAIL);
 		String motDePasse = getValeurChamp(request, CHAMP_PASS);
 		Docteur docteur = new Docteur();
@@ -40,11 +40,11 @@ public final class ConnexionDocteurForm {
 			setErreur(CHAMP_PASS, e.getMessage());
 		}
 		docteur.setMotDePasse(motDePasse);
-		/* Initialisation du résultat global de la validation. */
+		/* Initialisation du rï¿½sultat global de la validation. */
 		if (erreurs.isEmpty()) {
-			resultat = "Succès de la connexion.";
+			resultat = "Succes de la connexion.";
 		} else {
-			resultat = "Échec de la connexion.";
+			resultat = "Echec de la connnexion";
 		}
 		return docteur;
 	}
@@ -56,6 +56,9 @@ public final class ConnexionDocteurForm {
 		if (email != null && !email.matches("([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)")) {
 			throw new Exception("Merci de saisir une adresse mail valide.");
 		}
+	    if (email == null) {
+			throw new Exception("Ce champ est obligatoire, Merci de saisir une adresse mail.");
+		}
 	}
 
 	/**
@@ -64,7 +67,7 @@ public final class ConnexionDocteurForm {
 	private void validationMotDePasse(String motDePasse) throws Exception {
 		if (motDePasse != null) {
 			if (motDePasse.length() < 3) {
-				throw new Exception("Le mot de passe doit contenir au moins 3 caractères.");
+				throw new Exception("Le mot de passe doit contenir au moins 3 caractï¿½res.");
 			}
 		} else {
 			throw new Exception("Merci de saisir votre mot de passe.");
@@ -72,14 +75,14 @@ public final class ConnexionDocteurForm {
 	}
 
 	/*
-	 * Ajoute un message correspondant au champ spécifié à la map des erreurs.
+	 * Ajoute un message correspondant au champ spï¿½cifiï¿½ ï¿½ la map des erreurs.
 	 */
 	private void setErreur(String champ, String message) {
 		erreurs.put(champ, message);
 	}
 
 	/*
-	 * Méthode utilitaire qui retourne null si un champ est vide, et son contenu
+	 * Mï¿½thode utilitaire qui retourne null si un champ est vide, et son contenu
 	 * sinon.
 	 */
 	private static String getValeurChamp(HttpServletRequest request, String nomChamp) {

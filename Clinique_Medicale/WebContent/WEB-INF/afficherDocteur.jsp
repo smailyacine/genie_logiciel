@@ -19,6 +19,7 @@
                 <p>Email : <c:out value="${ docteur.email }"/></p>
                     <%-- Vérification de la présence d'un objet utilisateur en session --%>
                 <c:if test="${!empty sessionScope.docteurs}">
+                
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${docteur.email}</p>
                 </c:if>

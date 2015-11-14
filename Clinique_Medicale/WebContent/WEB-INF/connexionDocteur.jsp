@@ -4,16 +4,15 @@
 <head>
 <meta charset="utf-8" />
 <title>Connexion</title>
-<link type="text/css" rel="stylesheet"
-	href="<c:url
-value="/inc/style.css"/>" />
+<link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
 </head>
 <body>
 	<form method="post" action="<c:url value="/connexionDocteur" />">
 		<fieldset>
 			<legend>Connexion</legend>
+			<c:if test = "${empty sessionScope.sessionDocteur }">
 			<p>Vous pouvez vous connecter via ce formulaire.</p>
-			<c:if test="${empty sessionScope.sessionDocteur&& !empty requestScope.intervalleConnexions}">
+			<c:if test="${!empty requestScope.intervalleConnexions}">
 				<p class="info">(Vous ne vous êtes pas connecté(e) depuis ce
 					navigateur depuis ${requestScope.intervalleConnexions})</p>
 			</c:if>
@@ -28,9 +27,11 @@ value="/inc/style.css"/>" />
 			<label for="memoire">Se souvenir de moi</label> <input
 				type="checkbox" id="memoire" name="memoire" /> <br /> <input
 				type="submit" value="Connexion" class="sansLabel" /> <br />
+				</c:if>
+				<c:if test="${ !empty sessionScope.sessionDocteur}">
+				<c:import url="/inc/inc_docteur_menu.jsp" />
 			<p class="${empty form.erreurs ? 'succes' :'erreur'}">${form.resultat}</p>
 			<%-- Vérification de la présence d'un objet docteur en session --%>
-			<c:if test="${!emptysessionScope.sessionDocteur}">
 				<%-- Si l'docteur existe en session, alorson affiche son adresse email. --%>
 				<p class="succes">Vous êtes connecté(e) avec l'adresse :
 					${sessionScope.sessionDocteur.email}</p>

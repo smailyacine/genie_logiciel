@@ -40,4 +40,12 @@
     <servlet-name>ListeDocteurs</servlet-name>
     <url-pattern>/listeDocteurs</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>DeconnexionDocteur</servlet-name>
+    <servlet-class>com.app.servlets.DeconnexionDocteur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeconnexionDocteur</servlet-name>
+    <url-pattern>/DeconnexionDocteur</url-pattern>
+  </servlet-mapping>
 </web-app>
