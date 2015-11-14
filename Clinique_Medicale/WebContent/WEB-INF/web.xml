@@ -48,4 +48,21 @@
     <servlet-name>DeconnexionDocteur</servlet-name>
     <url-pattern>/DeconnexionDocteur</url-pattern>
   </servlet-mapping>
+    <servlet>
+    <servlet-name>ConnexionPatient</servlet-name>
+    <servlet-class>com.app.servlets.ConnexionPatient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConnexionPatient</servlet-name>
+    <url-pattern>/connexionPatient</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>DeconnexionPatient</servlet-name>
+    <servlet-class>com.app.servlets.DeconnexionPatient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeconnexionPatient</servlet-name>
+    <url-pattern>/DeconnexionPatient</url-pattern>
+  </servlet-mapping>
 </web-app>

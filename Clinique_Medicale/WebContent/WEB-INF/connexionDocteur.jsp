@@ -9,7 +9,7 @@
 <body>
 	<form method="post" action="<c:url value="/connexionDocteur" />">
 		<fieldset>
-			<legend>Connexion</legend>
+			<legend>Connexion Mdecin</legend>
 			<c:if test = "${empty sessionScope.sessionDocteur }">
 			<p>Vous pouvez vous connecter via ce formulaire.</p>
 			<c:if test="${!empty requestScope.intervalleConnexions}">

@@ -11,6 +11,7 @@ public class Patient {
 	 private String groupeSanguin;
 	 private String sexe;
 	 private int num_assurance;
+	 private String motDePasse;
 	 
 	 
 	public String getNom() {
@@ -60,6 +61,12 @@ public class Patient {
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getMotDePasse() {
+		return motDePasse;
+	}
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 	 
 	
