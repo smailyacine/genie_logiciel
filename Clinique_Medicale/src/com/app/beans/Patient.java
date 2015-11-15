@@ -10,7 +10,7 @@ public class Patient {
 	 private String email;
 	 private String groupeSanguin;
 	 private String sexe;
-	 private int num_assurance;
+	 private String num_assurance;
 	 private String motDePasse;
 	 
 	 
@@ -44,10 +44,10 @@ public class Patient {
 	public void setSexe(String sexe) {
 		this.sexe = sexe;
 	}
-	public int getNum_assurance() {
+	public String getNum_assurance() {
 		return num_assurance;
 	}
-	public void setNum_assurance(int num_assurance) {
+	public void setNum_assurance(String num_assurance) {
 		this.num_assurance = num_assurance;
 	}
 	public String getTelephone() {

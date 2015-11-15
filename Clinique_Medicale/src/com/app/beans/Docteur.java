@@ -4,7 +4,7 @@ public class Docteur {
 	
 	
 	 private long   id;
-	 private int identifiant;
+	 private String  identifiant;
 	 private String nom;
 	 private String prenom;
 	 private String adresse;
@@ -17,10 +17,10 @@ public class Docteur {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public int getIdentifiant() {
+	public String getIdentifiant() {
 		return identifiant;
 	}
-	public void setIdentifiant(int identifiant) {
+	public void setIdentifiant(String identifiant) {
 		this.identifiant = identifiant;
 	}
 	public String getNom() {

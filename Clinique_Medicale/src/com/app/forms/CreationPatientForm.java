@@ -79,7 +79,7 @@ public class CreationPatientForm {
 
 			try {
 				if ( erreurs.isEmpty() ) {
-					//patientDao.creer(patient);
+					patientDao.creer(patient);
 					resultat = "Succès de la création de patient.";
 				} else {
 					resultat = "Échec de la création du patient.";
@@ -161,13 +161,12 @@ public class CreationPatientForm {
 
 
 	private void traiterAssurance( String assurance, Patient patient ) {
-		int num_assurance = -1;
 		try {
-			num_assurance = validationAssurance(assurance );
+			validationAssurance(assurance );
 		} catch ( FormValidationException e ) {
 			setErreur( GROUPE_ASSURANCE, e.getMessage() );
 		}
-		patient.setNum_assurance(num_assurance);
+		patient.setNum_assurance(assurance);
 	}
 
 	private void traiterMotDePasse( String motDePasse, Patient patient ) {
@@ -219,12 +218,17 @@ public class CreationPatientForm {
 	}
 
 	private void validationEmail( String email ) throws FormValidationException {
-		if ( email != null && !email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
-			throw new FormValidationException( "Merci de saisir une adresse mail valide." );
+		if( email != null){
+			if (!email.matches( "([^.@]+)(\\.[^.@]+)*@([^.@]+\\.)+([^.@]+)" ) ) {
+				throw new FormValidationException( "Merci de saisir une adresse mail valide." );
+			} else if (patientDao.trouverEmail(email) != null ) {
+				throw new FormValidationException( "Cette mail existe déja, merci d'entrer une autre." );
+			}
+		}
+		else {
+			throw new FormValidationException( " Ce champ est obligatoiren, merci d'entrer une mail." );
 		}
 	}
-
-
 	private void validationGsanguin( String Gsanguin  ) throws FormValidationException {
 		if ( Gsanguin == null ) {
 			throw new FormValidationException( "Merci de specifier le votre groupe sanguin." );
@@ -237,23 +241,24 @@ public class CreationPatientForm {
 		}
 	}
 
-	private int  validationAssurance( String assurance  ) throws FormValidationException {
-		int num_assurance= -1;
+	private void  validationAssurance( String assurance  ) throws FormValidationException {
 		String regex = "[0-9]+";
 		if (assurance != null ) {
 			if( !assurance.matches(regex)){
 				throw new FormValidationException( "Le numéro de sécurité est composé seulement des chifres." );
 			}
-			else if(assurance.trim().length() != 4){
+			else if(assurance.trim().length() != 11){
 
-				throw new FormValidationException( "Le numéro de sécurité est composé de 4 chifres." );
+				throw new FormValidationException( "Le numéro de sécurité est composé de 11 chifres." );
+			}
+			else if(patientDao.trouverSecurite(assurance) != null){
+
+				throw new FormValidationException( "Ce numéro de sécurité sociale existe dèja, merci d'entrer un autre" );
 			}
 		}
 		else{
 			throw new FormValidationException( "Merci d'introduire un numéro de sécurité ." );
 		}
-		num_assurance= Integer.parseInt(assurance);
-		return num_assurance;
 	}
 
 

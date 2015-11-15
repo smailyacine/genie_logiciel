@@ -33,6 +33,11 @@
 <span class="erreur">${form.erreurs['emailDocteur']}</span>
 <br />
 
+<label for="motDePasseDocteur">Le mot de passe</label>
+<input type="password" id="motDePasseDocteur" name="motDePasseDocteur" value="<c:out value="${docteur.motDePasse}"/>" size="30" maxlength="60" />
+<span class="erreur">${form.erreurs['motDePasseDocteur']}</span>
+<br />
+
 <label for="imageDocteur">Upploader une image <span class="requis">*</span></label>
 <input type="file" id="imageDocteur" name="imageDocteur"  />
 <span class="erreur">${form.erreurs['imageDocteur']}</span>

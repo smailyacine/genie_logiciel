@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.app.beans.Docteur;
+import com.app.dao.DAOFactory;
+import com.app.dao.DocteurDao;
 import com.app.forms.CreationDocteurForm;
 
 
@@ -19,9 +21,15 @@ public class CreationDocteur extends HttpServlet {
     public static final String ATT_DOCTEUR      = "docteur";
     public static final String ATT_FORM        = "form";
     public static final String SESSION_DOCTEURS = "docteurs";
-
-    public static final String VUE_SUCCES      = "/WEB-INF/afficherDocteur.jsp";
+    public static final String VUE_SUCCES      = "/connexionDocteur";
     public static final String VUE_FORM        = "/WEB-INF/creerDocteur.jsp";
+    public static final String CONF_DAO_FACTORY= "daofactory";
+	private DocteurDao docteurDao;
+	
+	public void init() throws ServletException {
+    	/* Récupération d'une instance de notre DAO Utilisateur */
+    	this.docteurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getDocteurDao();
+    	}
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* À la réception d'une requête GET, simple affichage du formulaire */
@@ -30,7 +38,7 @@ public class CreationDocteur extends HttpServlet {
     
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         /* Préparation de l'objet formulaire */
-        CreationDocteurForm form = new CreationDocteurForm();
+        CreationDocteurForm form = new CreationDocteurForm(docteurDao);
 
         /* Traitement de la requête et récupération du bean en résultant */
         Docteur docteur = form.creerDocteur( request );
@@ -55,7 +63,9 @@ public class CreationDocteur extends HttpServlet {
             session.setAttribute( SESSION_DOCTEURS, docteurs );
 
             /* Affichage de la fiche récapitulative */
-            this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+           //
+      //this.getServletContext().getRequestDispatcher( VUE_SUCCES ).forward( request, response );
+            response.sendRedirect( request.getContextPath() + VUE_SUCCES );
         } else {
             /* Sinon, ré-affichage du formulaire de création avec les erreurs */
             this.getServletContext().getRequestDispatcher( VUE_FORM ).forward( request, response );
