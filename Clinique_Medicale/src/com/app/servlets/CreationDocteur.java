@@ -25,7 +25,6 @@ public class CreationDocteur extends HttpServlet {
     public static final String VUE_FORM        = "/WEB-INF/creerDocteur.jsp";
     public static final String CONF_DAO_FACTORY= "daofactory";
 	private DocteurDao docteurDao;
-	
 	public void init() throws ServletException {
     	/* Récupération d'une instance de notre DAO Utilisateur */
     	this.docteurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getDocteurDao();

@@ -70,4 +70,14 @@
     <servlet-name>DeconnexionPatient</servlet-name>
     <url-pattern>/DeconnexionPatient</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <servlet-class>com.app.servlets.Index</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/index</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

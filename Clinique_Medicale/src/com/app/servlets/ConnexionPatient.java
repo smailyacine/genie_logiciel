@@ -15,20 +15,19 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
-import com.app.beans.Docteur;
-import com.app.forms.ConnexionDocteurForm;
+import com.app.beans.Patient;
+import com.app.forms.ConnexionPatientForm;
 
-public class ConnexionDocteur extends HttpServlet {
+public class ConnexionPatient extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-	public static final String ATT_USER = "docteur";
+	public static final String ATT_USER = "patient";
 	public static final String ATT_FORM = "form";
 	public static final String ATT_INTERVALLE_CONNEXIONS = "intervalleConnexions";
-	public static final String ATT_SESSION_USER = "sessionDocteur";
+	public static final String ATT_SESSION_USER = "sessionPatient";
 	public static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
-	public static final String VUE = "/WEB-INF/connexionDocteur.jsp";
-	public static final String VUE_SUCCES = "/WEB-INF/afficherDocteur.jsp";
+	public static final String VUE = "/WEB-INF/connexionPatient.jsp";
 	public static final String CHAMP_MEMOIRE = "memoire";
 	public static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 an
 
@@ -61,11 +60,11 @@ public class ConnexionDocteur extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Pr�paration de l'objet formulaire */
-		ConnexionDocteurForm form = new ConnexionDocteurForm();
+		ConnexionPatientForm form = new ConnexionPatientForm();
 		/*
 		 * Traitement de la requ�te et r�cup�ration du bean en r�sultant
 		 */
-		Docteur docteur = form.connecterDocteur(request);
+		Patient patient = form.connecterPatient(request);
 		/* R�cup�ration de la session depuis la requ�te */
 		HttpSession session = request.getSession();
 		/*
@@ -73,7 +72,7 @@ public class ConnexionDocteur extends HttpServlet {
 		 * Docteur � la session, sinon suppression du bean de la session.
 		 */
 		if (form.getErreurs().isEmpty()) {
-			session.setAttribute(ATT_SESSION_USER, docteur);
+			session.setAttribute(ATT_SESSION_USER, patient);
 		} else {
 			session.setAttribute(ATT_SESSION_USER, null);
 		}
@@ -92,12 +91,8 @@ public class ConnexionDocteur extends HttpServlet {
 		}
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute(ATT_FORM, form);
-		request.setAttribute(ATT_USER, docteur);
-		if (form.getErreurs().isEmpty()) {
-		this.getServletContext().getRequestDispatcher(VUE_SUCCES).forward(request, response);
-		} else {
-		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);	
-		}
+		request.setAttribute(ATT_USER, patient);
+		this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
 	}
 
 	/*
