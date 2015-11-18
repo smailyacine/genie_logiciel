@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.app.dao.DAOException;
+import com.app.beans.Docteur;
 import com.app.beans.Patient;
 
 public class PatientDaoImpl implements PatientDao {
@@ -19,6 +20,7 @@ l'interface UtilisateurDao */
 	private static final String SQL_SELECT_PAR_NAME = "select nom,prenom,adresse,telephone,email,groupesanguin, sex,num_assurance from p_cliniuqe.patient where nom = ?";
 	private static final String SQL_SELECT_PAR_EMAIL = "select nom,prenom,adresse,telephone,email,groupesanguin, sex,num_assurance from p_cliniuqe.patient where email = ?";
 	private static final String SQL_SELECT_PAR_NUM_SECURITE = "select nom,prenom,adresse,telephone,email,groupesanguin, sex,num_assurance from p_cliniuqe.patient where num_assurance = ?";
+	private static final String SQL_SELECT_PASSE_EMAIL= "select nom,prenom,adresse,telephone,email,groupesanguin, sex,num_assurance from p_cliniuqe.patient where email = ? and motDePasse = ?";
 	private static final String SQL_DELETE_PATIENT = "delete from p_cliniuqe.patient where id = ?";
 	private static final String SQL_LISTER_PATIENT = "SELECT *from p_cliniuqe.patient ";
 private DAOFactory daoFactory;
@@ -197,6 +199,31 @@ public List<Patient> lister_patients() throws DAOException {
 	}
 	return patients;
 	
+}
+
+@Override
+public Patient trouverEmailPasse(String email, String motDePasse)
+		throws DAOException {
+	Connection connexion = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	Patient patient = null;
+	try {
+	/* Récupération d'une connexion depuis la Factory */
+	connexion = daoFactory.getConnection();
+	preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_PASSE_EMAIL, false,email, motDePasse );
+	resultSet = preparedStatement.executeQuery();
+	/* Parcours de la ligne de données de l'éventuel ResulSet
+	retourné */
+	if ( resultSet.next() ) {
+	patient = map_patient( resultSet );
+	}
+	} catch ( SQLException e ) {
+	throw new DAOException( e );
+	} finally {
+	fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	}
+	return patient;
 }
 
 

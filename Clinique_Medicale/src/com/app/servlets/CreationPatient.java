@@ -21,7 +21,7 @@ public class CreationPatient extends HttpServlet {
     public static final String ATT_PATIENT      = "patient";
     public static final String ATT_FORM        = "form";
     public static final String SESSION_PATIENTS = "patients";
-
+    public static final String SESSION_PATIENT = "patient";
     public static final String VUE_SUCCES      = "/WEB-INF/afficherPatient.jsp";
     public static final String VUE_FORM        = "/WEB-INF/creerPatient.jsp";
     public static final String CONF_DAO_FACTORY= "daofactory";
@@ -52,6 +52,7 @@ public class CreationPatient extends HttpServlet {
         if ( form.getErreurs().isEmpty() ) {
             /* Alors récupération de la map des clients dans la session */
             HttpSession session = request.getSession();
+            session.setAttribute( SESSION_PATIENT, patient );
             Map<String, Patient> patients = (HashMap<String, Patient>) session.getAttribute( SESSION_PATIENTS );
             /* Si aucune map n'existe, alors initialisation d'une nouvelle map */
             if ( patients == null ) {

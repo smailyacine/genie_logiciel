@@ -1,6 +1,7 @@
 package com.app.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -15,7 +16,11 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
+import com.app.beans.Consultation;
 import com.app.beans.Patient;
+import com.app.dao.ConsultationDao;
+import com.app.dao.DAOFactory;
+import com.app.dao.PatientDao;
 import com.app.forms.ConnexionPatientForm;
 
 public class ConnexionPatient extends HttpServlet {
@@ -25,11 +30,23 @@ public class ConnexionPatient extends HttpServlet {
 	public static final String ATT_FORM = "form";
 	public static final String ATT_INTERVALLE_CONNEXIONS = "intervalleConnexions";
 	public static final String ATT_SESSION_USER = "sessionPatient";
+	public static final String ATT_CONSULTATAION_USER = "consultationPatient";
 	public static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
+	public static final String COOKIE_ID_USER = "idpatient";
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
 	public static final String VUE = "/WEB-INF/connexionPatient.jsp";
 	public static final String CHAMP_MEMOIRE = "memoire";
+	 public static final String CONF_DAO_FACTORY= "daofactory";
 	public static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 an
+	private static final String ATT_CONSULTATION_USER = null;
+	private PatientDao patientDao;
+	private ConsultationDao consultationDao;
+	
+	 public void init() throws ServletException {
+	    	/* Récupération d'une instance de notre DAO Utilisateur */
+	    	this.patientDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getPatientDao();
+	    	this.consultationDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getConsultationDao();
+	    	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Tentative de r�cup�ration du cookie depuis la requ�te */
@@ -60,11 +77,12 @@ public class ConnexionPatient extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Pr�paration de l'objet formulaire */
-		ConnexionPatientForm form = new ConnexionPatientForm();
+		ConnexionPatientForm form = new ConnexionPatientForm(patientDao,consultationDao);
 		/*
 		 * Traitement de la requ�te et r�cup�ration du bean en r�sultant
 		 */
 		Patient patient = form.connecterPatient(request);
+		ArrayList<Consultation> consultation = form.consultationPatient(patient);
 		/* R�cup�ration de la session depuis la requ�te */
 		HttpSession session = request.getSession();
 		/*
@@ -73,6 +91,11 @@ public class ConnexionPatient extends HttpServlet {
 		 */
 		if (form.getErreurs().isEmpty()) {
 			session.setAttribute(ATT_SESSION_USER, patient);
+			if(consultation != null){
+				session.setAttribute(ATT_CONSULTATAION_USER, consultation);
+			}else{
+				session.setAttribute(ATT_CONSULTATAION_USER, null);
+			}
 		} else {
 			session.setAttribute(ATT_SESSION_USER, null);
 		}
@@ -85,9 +108,11 @@ public class ConnexionPatient extends HttpServlet {
 			String dateDerniereConnexion = dt.toString(formatter);
 			/* Cr�ation du cookie, et ajout � la r�ponse HTTP */
 			setCookie(response, COOKIE_DERNIERE_CONNEXION, dateDerniereConnexion, COOKIE_MAX_AGE);
+			setCookie(response, COOKIE_ID_USER, patient.getNum_assurance(), COOKIE_MAX_AGE);
 		} else {
 			/* Demande de suppression du cookie du navigateur */
 			setCookie(response, COOKIE_DERNIERE_CONNEXION, "", 0);
+			setCookie(response, COOKIE_ID_USER, "", 0);
 		}
 		/* Stockage du formulaire et du bean dans l'objet request */
 		request.setAttribute(ATT_FORM, form);

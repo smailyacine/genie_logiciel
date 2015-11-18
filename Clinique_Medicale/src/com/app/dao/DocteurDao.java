@@ -9,5 +9,6 @@ void supprimer(Docteur docteur)throws DAOException;
 List<Docteur> lister_docteurs() throws DAOException;
 Docteur trouverID( String identifiant ) throws DAOException;
 Docteur trouverEmail( String email ) throws DAOException;
+Docteur trouverEmailPasse(String email, String motDePasse)throws DAOException;
 // penser à mettre Lister()
 }

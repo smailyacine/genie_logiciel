@@ -16,6 +16,8 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import com.app.beans.Docteur;
+import com.app.dao.DAOFactory;
+import com.app.dao.DocteurDao;
 import com.app.forms.ConnexionDocteurForm;
 
 public class ConnexionDocteur extends HttpServlet {
@@ -29,8 +31,14 @@ public class ConnexionDocteur extends HttpServlet {
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
 	public static final String VUE = "/WEB-INF/connexionDocteur.jsp";
 	public static final String VUE_SUCCES = "/WEB-INF/afficherDocteur.jsp";
+	public static final String CONF_DAO_FACTORY= "daofactory";
 	public static final String CHAMP_MEMOIRE = "memoire";
 	public static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 an
+	private DocteurDao docteurDao;
+	public void init() throws ServletException {
+    	/* Récupération d'une instance de notre DAO Utilisateur */
+    	this.docteurDao = ( (DAOFactory) getServletContext().getAttribute( CONF_DAO_FACTORY )).getDocteurDao();
+    	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Tentative de r�cup�ration du cookie depuis la requ�te */
@@ -61,7 +69,7 @@ public class ConnexionDocteur extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Pr�paration de l'objet formulaire */
-		ConnexionDocteurForm form = new ConnexionDocteurForm();
+		ConnexionDocteurForm form = new ConnexionDocteurForm(docteurDao);
 		/*
 		 * Traitement de la requ�te et r�cup�ration du bean en r�sultant
 		 */

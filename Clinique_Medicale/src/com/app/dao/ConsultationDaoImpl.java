@@ -5,34 +5,63 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.app.dao.DAOException;
 import com.app.beans.Consultation;
+import com.app.beans.Docteur;
+import com.app.beans.Patient;
 
 public class ConsultationDaoImpl implements ConsultationDao {
 /* Implémentation de la méthode trouver() définie dans
 l'interface UtilisateurDao */
-	private static final String SQL_INSERT = "INSERT INTO Utilisateur (email, mot_de_passe, nom, date_inscription) VALUES (?, ?, ?, NOW())";
-	private static final String SQL_SELECT_PAR_EMAIL = "SELECT id, 	email, nom, mot_de_passe, date_inscription FROM Utilisateur WHERE email = ?";
+	private static final String SQL_INSERT = "INSERT INTO p_cliniuqe.consultation (id_patient, id_docteur, date, diagnostique,teste) VALUES (?, ?, ?,?,?)";
+	private static final String SQL_SELECT_PAR_PATIENT = "SELECT id,id_patient, id_docteur, date, diagnostique,teste FROM p_cliniuqe.consultation WHERE id_patient = ?";
+	private static final String SQL_SELECT_PAR_DOCTEUR = "SELECT id_patient, id_docteur, date, diagnostique,teste FROM p_cliniuqe.consultation WHERE id_docteur = ?";
+
 private DAOFactory daoFactory;
 ConsultationDaoImpl( DAOFactory daoFactory ) {
 this.daoFactory = daoFactory;
 }
 
-public Consultation trouver( Long ID ) throws DAOException {
+public ArrayList<Consultation> trouverPatient( Patient patient ) throws DAOException {
 Connection connexion = null;
 PreparedStatement preparedStatement = null;
 ResultSet resultSet = null;
-Consultation consultation = null;
+ArrayList<Consultation> consultation = new ArrayList<Consultation>();
 try {
 /* Récupération d'une connexion depuis la Factory */
 connexion = daoFactory.getConnection();
-preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_PAR_EMAIL, false, ID );
+preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_PAR_PATIENT, false, patient.getNum_assurance() );
 resultSet = preparedStatement.executeQuery();
 /* Parcours de la ligne de données de l'éventuel ResulSet
 retourné */
-if ( resultSet.next() ) {
-consultation = map_consultation( resultSet );
+while ( resultSet.next() ) {
+consultation.add(map_consultation( resultSet ));
+}
+} catch ( SQLException e ) {
+throw new DAOException( e );
+} finally {
+fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+}
+return consultation;
+}
+
+
+public ArrayList<Consultation> trouverDocteur( Docteur docteur ) throws DAOException {
+Connection connexion = null;
+PreparedStatement preparedStatement = null;
+ResultSet resultSet = null;
+ArrayList<Consultation> consultation = null;
+try {
+/* Récupération d'une connexion depuis la Factory */
+connexion = daoFactory.getConnection();
+preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_PAR_DOCTEUR, false, docteur.getIdentifiant() );
+resultSet = preparedStatement.executeQuery();
+/* Parcours de la ligne de données de l'éventuel ResulSet
+retourné */
+while ( resultSet.next() ) {
+consultation.add(map_consultation( resultSet ));
 }
 } catch ( SQLException e ) {
 throw new DAOException( e );

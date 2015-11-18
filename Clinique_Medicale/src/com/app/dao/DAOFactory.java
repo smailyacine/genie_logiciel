@@ -89,4 +89,5 @@ données */
 	public ConsultationDao getConsultationDao() {
 		return new ConsultationDaoImpl( this );
 	}
+	
 }

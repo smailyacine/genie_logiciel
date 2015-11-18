@@ -80,4 +80,25 @@
     <url-pattern>/index</url-pattern>
   </servlet-mapping>
   
+    <servlet>
+    <servlet-name>DossierPatient</servlet-name>
+    <servlet-class>com.app.servlets.DossierPatient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DossierPatient</servlet-name>
+    <url-pattern>/dossierpatient</url-pattern>
+  </servlet-mapping>
+  
+      <servlet>
+    <servlet-name>ConsultationPatient</servlet-name>
+    <servlet-class>com.app.servlets.ConsultationPatient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ConsultationPatient</servlet-name>
+    <url-pattern>/consultationpatient</url-pattern>
+  </servlet-mapping>
+  
+  
+
+
 </web-app>

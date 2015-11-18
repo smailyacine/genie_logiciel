@@ -19,6 +19,7 @@ l'interface UtilisateurDao */
 	private static final String SQL_DELETE = "delete from docteur where id = ?";
 	private static final String SQL_SELECT_ID = "select identifiant, nom,prenom, adresse,telephone,email from docteur where identifiant = ?";
 	private static final String SQL_SELECT_EMAIL = "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ?";
+	private static final String SQL_SELECT_PASSE_EMAIL= "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ? and motDePasse = ?";
 	private static final String SQL_SELECT = "select * from docteur";
 private DAOFactory daoFactory;
 DocteurDaoImpl( DAOFactory daoFactory ) {
@@ -147,6 +148,31 @@ public List<Docteur> lister_docteurs() throws DAOException {
 	connection );
 	}
 	return docteurs;
+}
+
+@Override
+public Docteur trouverEmailPasse(String email, String motDePasse) throws DAOException {
+	
+	Connection connexion = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	Docteur docteur = null;
+	try {
+	/* Récupération d'une connexion depuis la Factory */
+	connexion = daoFactory.getConnection();
+	preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_PASSE_EMAIL, false,email, motDePasse );
+	resultSet = preparedStatement.executeQuery();
+	/* Parcours de la ligne de données de l'éventuel ResulSet
+	retourné */
+	if ( resultSet.next() ) {
+	docteur = map_docteur( resultSet );
+	}
+	} catch ( SQLException e ) {
+	throw new DAOException( e );
+	} finally {
+	fermeturesSilencieuses( resultSet, preparedStatement, connexion );
+	}
+	return docteur;
 }
 
 

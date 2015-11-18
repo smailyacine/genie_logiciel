@@ -69,7 +69,7 @@ public class DAOUtilitaire {
 		consultation.setID_Patient(resultSet.getLong("ID_patient"));
 		consultation.setDate(resultSet.getString("date"));
 		consultation.setDiagnostique(resultSet.getString("diagnostique"));
-		consultation.setTest(resultSet.getString("diagnostique"));
+		consultation.setTest(resultSet.getString("teste"));
 		return consultation;
 	}
 	
