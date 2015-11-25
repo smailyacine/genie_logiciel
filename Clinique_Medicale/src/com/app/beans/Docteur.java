@@ -11,6 +11,7 @@ public class Docteur {
 	 private String telephone;
 	 private String email;
 	 private String motDePasse;
+	 private String specialite;
 	public long getId() {
 		return id;
 	}
@@ -58,6 +59,12 @@ public class Docteur {
 	}
 	public void setMotDePasse(String motDePasse) {
 		this.motDePasse = motDePasse;
+	}
+	public String getSpecialite() {
+		return specialite;
+	}
+	public void setSpecialite(String specialite) {
+		this.specialite = specialite;
 	}
 	 
 	

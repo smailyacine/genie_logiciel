@@ -6,9 +6,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.app.beans.Consultation;
+import com.app.beans.Docteur;
 import com.app.beans.Patient;
 import com.app.dao.ConsultationDao;
 import com.app.dao.DAOException;
+import com.app.dao.DocteurDao;
 import com.app.dao.PatientDao;
 public final class ConnexionPatientForm {
 	private static final String CHAMP_EMAIL = "email";
@@ -16,10 +18,9 @@ public final class ConnexionPatientForm {
 	private static final String CHAMP_PASS_ERROR = "erreur_pass_email";
 	private String resultat;
 	private Map<String, String> erreurs = new HashMap<String,String>();
+	private Map<String, Docteur>docs = new HashMap<String,Docteur>();
 	private PatientDao patientDao;
-	private ConsultationDao consultationtDao;
-	public ConnexionPatientForm(PatientDao patientDao, ConsultationDao consultationDao) {
-		this.consultationtDao = consultationDao;
+	public ConnexionPatientForm(PatientDao patientDao) {
 		this.patientDao = patientDao;
 	}
 	
@@ -29,6 +30,9 @@ public final class ConnexionPatientForm {
 	}
 	public Map<String, String> getErreurs() {
 		return erreurs;
+	}
+	public Map<String, Docteur> getdocs() {
+		return docs;
 	}
 	public Patient connecterPatient( HttpServletRequest
 			request ) {
@@ -62,26 +66,9 @@ public final class ConnexionPatientForm {
 		return patient;
 	}
 	
-	/*---------- La mèthode pour recuprer les consultations d'un patient --------*/
 	
-	public ArrayList<Consultation> consultationPatient(Patient patient){
-		ArrayList<Consultation> consultation = new ArrayList<Consultation>();
-		try {
-			consultation = consultationtDao.trouverPatient(patient);
-			if(consultation == null){
-				
-				resultat = "Pas de consultation pour effectué pour Vous.";
-			}
-		}catch ( DAOException e ) {
-			resultat = "Échec de la connexion du table de consultation : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
-			e.printStackTrace();
-		}
-		return consultation;
-		
-	}
-
 	/*---------------------------------------------------------------------------------------*/
-	
+		
 	private void traiterEmail( String email, Patient patient ) {
 		try {
 			validationEmail( email );

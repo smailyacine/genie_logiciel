@@ -89,5 +89,8 @@ données */
 	public ConsultationDao getConsultationDao() {
 		return new ConsultationDaoImpl( this );
 	}
+	public RdvDao getRdvDao() {
+		return new RdvDaoImpl( this );
+	}
 	
 }

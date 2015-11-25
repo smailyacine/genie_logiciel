@@ -3,9 +3,11 @@ package com.app.beans;
 public class Consultation {
 
 	private Long ID;
+	private String nomPatient;
+	private String nomDocteur;
+	private String prenomPatient;
+	private String prenomDocteur;
 	private String date;
-	private Long ID_Docteur;
-	private Long ID_Patient;
 	private String diagnostique;
 	private String test;
 
@@ -29,21 +31,9 @@ public class Consultation {
 		this.date = date;
 	}
 
-	public Long getID_Docteur() {
-		return ID_Docteur;
-	}
 
-	public void setID_Docteur(long l) {
-		ID_Docteur = l;
-	}
 
-	public Long getID_Patient() {
-		return ID_Patient;
-	}
 
-	public void setID_Patient(Long iD_Patient) {
-		ID_Patient = iD_Patient;
-	}
 
 	public String getDiagnostique() {
 		return diagnostique;
@@ -60,7 +50,38 @@ public class Consultation {
 	public void setTest(String test) {
 		this.test = test;
 	}
-	
+
+	public String getNomPatient() {
+		return nomPatient;
+	}
+
+	public void setNomPatient(String nomPatient) {
+		this.nomPatient = nomPatient;
+	}
+
+	public String getNomDocteur() {
+		return nomDocteur;
+	}
+
+	public void setNomDocteur(String nomDocteur) {
+		this.nomDocteur = nomDocteur;
+	}
+
+	public String getPrenomPatient() {
+		return prenomPatient;
+	}
+
+	public void setPrenomPatient(String prenomPatient) {
+		this.prenomPatient = prenomPatient;
+	}
+
+	public String getPrenomDocteur() {
+		return prenomDocteur;
+	}
+
+	public void setPrenomDocteur(String prenomDocteur) {
+		this.prenomDocteur = prenomDocteur;
+	}
 
 
 	

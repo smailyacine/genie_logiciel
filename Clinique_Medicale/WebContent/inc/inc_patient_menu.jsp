@@ -9,9 +9,10 @@
 <body>
 <div class="menu_horizontal">
 <ul >
-<li><a href="http://localhost:8080/Clinique_Medicale/consultationpatient"><img src="" alt="" />Consultations</a></li>
-<li><a href="#"><img src="" alt="" />Liste des médcins</a></li>
-<li><a href="#"><img src="" alt="" />Fixer un rendez-vous</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/index"><img src="" alt="" />Acceiul</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/listerconsultations"><img src="" alt="" />Consultations</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/listerdocteurs"><img src="" alt="" />Liste des médcins</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/recuperermedcins"><img src="" alt="" />Fixer un rendez-vous</a></li>
 <li><a href="http://localhost:8080/Clinique_Medicale/dossierpatient"><img src="" alt="" />Mon Dossier</a></li>
 <li><a href="http://localhost:8080/Clinique_Medicale/DeconnexionPatient"><img src="" alt=""/>Deconnexion</a></li>
 </ul>

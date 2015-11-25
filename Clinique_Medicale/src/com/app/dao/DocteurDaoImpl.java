@@ -21,6 +21,8 @@ l'interface UtilisateurDao */
 	private static final String SQL_SELECT_EMAIL = "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ?";
 	private static final String SQL_SELECT_PASSE_EMAIL= "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ? and motDePasse = ?";
 	private static final String SQL_SELECT = "select * from docteur";
+	private static final String SQL_SELECT_SPECIALITE = "select * from docteur where specialite = ?";
+
 private DAOFactory daoFactory;
 DocteurDaoImpl( DAOFactory daoFactory ) {
 this.daoFactory = daoFactory;
@@ -129,11 +131,11 @@ fermeturesSilencieuses( preparedStatement,connexion );
 }
 
 @Override
-public List<Docteur> lister_docteurs() throws DAOException {
+public ArrayList<Docteur> lister_docteurs() throws DAOException {
 	Connection connection = null;
 	PreparedStatement preparedStatement = null;
 	ResultSet resultSet = null;
-	List<Docteur> docteurs = new ArrayList<Docteur>();
+	ArrayList<Docteur> docteurs = new ArrayList<Docteur>();
 	try {
 	connection = daoFactory.getConnection();
 	preparedStatement = connection.prepareStatement(SQL_SELECT );
@@ -173,6 +175,30 @@ public Docteur trouverEmailPasse(String email, String motDePasse) throws DAOExce
 	fermeturesSilencieuses( resultSet, preparedStatement, connexion );
 	}
 	return docteur;
+}
+
+@Override
+public ArrayList<Docteur> trouverSpecialite(String specialite)
+		throws DAOException {
+	Connection connexion = null;
+	PreparedStatement preparedStatement = null;
+	ResultSet resultSet = null;
+	ArrayList<Docteur> docteurs = new ArrayList<Docteur>();
+	try {
+		connexion = daoFactory.getConnection();
+	preparedStatement = initialisationRequetePreparee( connexion,SQL_SELECT_SPECIALITE, false,specialite );
+	resultSet = preparedStatement.executeQuery();
+	while ( resultSet.next() ) {
+	docteurs.add( map_docteur( resultSet ) );
+	}
+	} catch ( SQLException e ) {
+	throw new DAOException( e );
+	} finally {
+	fermeturesSilencieuses( resultSet, preparedStatement,
+	connexion );
+	}
+	return docteurs;
+	
 }
 
 

@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.joda.time.DateTime;
+
 import com.app.beans.Administrateur;
 import com.app.beans.Consultation;
+import com.app.beans.Creneau;
 import com.app.beans.Docteur;
 import com.app.beans.Patient;
 
@@ -57,6 +60,7 @@ public class DAOUtilitaire {
 		docteur.setAdresse(resultSet.getString("adresse"));
 		docteur.setEmail(resultSet.getString("email"));
 		docteur.setTelephone(resultSet.getString("telephone"));
+		docteur.setSpecialite(resultSet.getString("specialite"));
 
 		return docteur;
 	}
@@ -65,12 +69,25 @@ public class DAOUtilitaire {
 	SQLException {
 		Consultation consultation = new Consultation();
 		consultation.setID(resultSet.getLong("ID"));
-		consultation.setID_Docteur(resultSet.getLong("ID_docteur"));
-		consultation.setID_Patient(resultSet.getLong("ID_patient"));
+		consultation.setNomPatient(resultSet.getString("patient.nom"));
+		consultation.setPrenomPatient(resultSet.getString("patient.prenom"));
+		consultation.setNomDocteur(resultSet.getString("docteur.nom"));
+		consultation.setPrenomDocteur(resultSet.getString("docteur.prenom"));
 		consultation.setDate(resultSet.getString("date"));
 		consultation.setDiagnostique(resultSet.getString("diagnostique"));
 		consultation.setTest(resultSet.getString("teste"));
 		return consultation;
+	}
+	
+	
+	
+	static Creneau map_slot(ResultSet resultSet) throws SQLException{
+		Creneau creneau = new Creneau();
+		creneau.setId(resultSet.getLong("idslot"));
+		creneau.setHours(resultSet.getString("interval"));
+		creneau.setIdentifiantdocteur(resultSet.getString("id_docteur"));
+		creneau.setTime(new DateTime(resultSet.getTimestamp("rdvTime")));
+		return creneau;
 	}
 	
 

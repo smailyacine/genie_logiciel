@@ -99,6 +99,50 @@
   </servlet-mapping>
   
   
+   <servlet>
+    <servlet-name>ListeDocteur</servlet-name>
+    <servlet-class>com.app.servlets.ListeDocteur</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeDocteur</servlet-name>
+    <url-pattern>/listerdocteurs</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>ListeConsultation</servlet-name>
+    <servlet-class>com.app.servlets.ListeConsultation</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListeConsultation</servlet-name>
+    <url-pattern>/listerconsultations</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>RecupDocsMenu</servlet-name>
+    <servlet-class>com.app.servlets.RecupDocsMenu</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecupDocsMenu</servlet-name>
+    <url-pattern>/recuperermedcins</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>RecupererRDV</servlet-name>
+    <servlet-class>com.app.servlets.RecupererRDV</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RecupererRDV</servlet-name>
+    <url-pattern>/recupererRdv</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ValiderRdvPatient</servlet-name>
+    <servlet-class>com.app.servlets.ValiderRdvPatient</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ValiderRdvPatient</servlet-name>
+    <url-pattern>/validerRDV</url-pattern>
+  </servlet-mapping>
 
 
 </web-app>

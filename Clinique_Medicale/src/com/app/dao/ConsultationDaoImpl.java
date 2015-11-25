@@ -16,7 +16,9 @@ public class ConsultationDaoImpl implements ConsultationDao {
 /* Implémentation de la méthode trouver() définie dans
 l'interface UtilisateurDao */
 	private static final String SQL_INSERT = "INSERT INTO p_cliniuqe.consultation (id_patient, id_docteur, date, diagnostique,teste) VALUES (?, ?, ?,?,?)";
-	private static final String SQL_SELECT_PAR_PATIENT = "SELECT id,id_patient, id_docteur, date, diagnostique,teste FROM p_cliniuqe.consultation WHERE id_patient = ?";
+	private static final String SQL_SELECT_PAR_PATIENT = "select * from  "
+			+ "patient inner join  consultation ON patient.num_assurance = consultation.id_patient "
+			+ "INNER JOIn docteur on consultation.id_docteur = docteur.identifiant where patient.num_assurance = ?;";
 	private static final String SQL_SELECT_PAR_DOCTEUR = "SELECT id_patient, id_docteur, date, diagnostique,teste FROM p_cliniuqe.consultation WHERE id_docteur = ?";
 
 private DAOFactory daoFactory;
@@ -84,7 +86,7 @@ ResultSet valeursAutoGenerees = null;
 try {
 /* Récupération d'une connexion depuis la Factory */
 connexion = daoFactory.getConnection();
-preparedStatement = initialisationRequetePreparee( connexion,SQL_INSERT, true, consultation.getID_Docteur(),consultation.getID_Patient(),consultation.getDate(),consultation.getDiagnostique(),consultation.getTest());
+preparedStatement = initialisationRequetePreparee( connexion,SQL_INSERT, true,consultation.getDate(),consultation.getDiagnostique(),consultation.getTest());
 int statut = preparedStatement.executeUpdate();
 /* Analyse du statut retourné par la requête d'insertion */
 if ( statut == 0 ) {

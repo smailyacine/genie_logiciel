@@ -64,6 +64,11 @@ div#corps{
 table{
 	border-collapse: collapse;
 }
+table.center{
+    margin-left:auto; 
+    margin-right:auto;
+  }
+}
 
 tr{
 	background-color: #efefef;
