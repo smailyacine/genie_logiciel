@@ -8,6 +8,7 @@
 	href="<c:url value="/inc/style.css"/>" />
 </head>
 <body>
+<c:import url="/inc/inc_patient_menu.jsp" />
 	<c:if test="${empty sessionScope.sessionPatient }">
 		<form method="post" action="<c:url value="/connexionPatient" />">
 			<fieldset>
@@ -28,13 +29,13 @@
 				<input type="password" id="motdepasse" name="motdepasse" value=""
 					size="20" maxlength="20" /> <span class="erreur">${form.erreurs['motdepasse']}</span>
 				<br /> <br /> <label for="memoire">Se souvenir de moi</label> <input
-					type="checkbox" id="memoire" name="memoire" /> <br /> <input
+					type="checkbox" id="memoire" name="memoire" /> <br />
+					<label for="memoire"><a href="<c:url value="/creationPatient"></c:url>">Nouveau utilisateur ? Enregistrez-vous</a> </label>  <input
 					type="submit" value="Connexion" class="sansLabel" /> <br />
 			</fieldset>
 		</form>
 	</c:if>
 	<c:if test="${ !empty sessionScope.sessionPatient}">
-		<c:import url="/inc/inc_patient_menu.jsp" />
 		<p class="${empty form.erreurs ? 'succes' :'erreur'}">${form.resultat}</p>
 		<%-- Vérification de la présence d'un objet docteur en session --%>
 		<%-- Si l'docteur existe en session, alorson affiche son adresse email. --%>

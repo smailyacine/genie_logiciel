@@ -144,5 +144,82 @@
     <url-pattern>/validerRDV</url-pattern>
   </servlet-mapping>
 
+ <servlet>
+    <servlet-name>VoireRdv</servlet-name>
+    <servlet-class>com.app.servlets.VoireRdv</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VoireRdv</servlet-name>
+    <url-pattern>/voireRdv</url-pattern>
+  </servlet-mapping>
+
+ <servlet>
+    <servlet-name>SupprimerRdv</servlet-name>
+    <servlet-class>com.app.servlets.SupprimerRdv</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerRdv</servlet-name>
+    <url-pattern>/suppressionRdv</url-pattern>
+  </servlet-mapping>
+
+
+ <servlet>
+    <servlet-name>EmploiDuTemps</servlet-name>
+    <servlet-class>com.app.servlets.EmploiDuTemps</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmploiDuTemps</servlet-name>
+    <url-pattern>/voireEmploiTemps</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+    <servlet-name>AjouterCreneauMedcin</servlet-name>
+    <servlet-class>com.app.servlets.AjouterCreneauMedcin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjouterCreneauMedcin</servlet-name>
+    <url-pattern>/ajouterCreneau</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>AjouterNouveauCreneau</servlet-name>
+    <servlet-class>com.app.servlets.AjouterNouveauCreneau</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AjouterNouveauCreneau</servlet-name>
+    <url-pattern>/validerNouveauCreneau</url-pattern>
+  </servlet-mapping>
+  
+
+
+  <servlet>
+    <servlet-name>SupprimerCreneau</servlet-name>
+    <servlet-class>com.app.servlets.SupprimerCreneau</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SupprimerCreneau</servlet-name>
+    <url-pattern>/supprimerCreneau</url-pattern>
+  </servlet-mapping>
+  
+  
+    <servlet>
+    <servlet-name>ValiderSupCreneau</servlet-name>
+    <servlet-class>com.app.servlets.ValiderSupCreneau</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ValiderSupCreneau</servlet-name>
+    <url-pattern>/ValiderSuppressionCreneau</url-pattern>
+  </servlet-mapping>
+  
+  
+
+ <filter>
+<filter-name>EnterFilter</filter-name>
+<filter-class>com.app.filters.EnterFilter</filter-class>
+</filter>
+<filter-mapping>
+<filter-name>EnterFilter</filter-name>
+<url-pattern>/WEB-INF/*</url-pattern>
+</filter-mapping> 
 
 </web-app>

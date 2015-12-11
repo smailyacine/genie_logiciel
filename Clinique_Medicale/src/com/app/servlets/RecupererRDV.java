@@ -28,6 +28,8 @@ public class RecupererRDV extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String ATT_USER = "docteur";
 	public static final String ATT_FORM = "form";
+	public static final String VUE_CONNECT = "/connexionPatient";
+	public static final String ATT_SESSION_USER = "sessionPatient";
 	public static final String ATT_SESSION_RDV_CRENEAU = "sessionCreneau";
 	public static final String ATT_SESSION_DOCTEUR_LISTE = "sessionDocteurListe";
 	public static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
@@ -46,7 +48,10 @@ public class RecupererRDV extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	/* --------------------------------        récupérer la liste des médecins     ------------------------------------------------------------*/
-	
+		HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null){
+			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
+		}else{
 		
 		String date =  request.getParameter("date");
 		String identifiant = request.getParameter("identifiant");
@@ -55,23 +60,22 @@ public class RecupererRDV extends HttpServlet {
 		try {
 			listecreneau = rdvDao.trouverRdv(identifiant, date);
 				if(listecreneau.size() == 0){
-					resultat_ajax = "pas de creneau disponible pour cette journé  !.";
+					resultat_ajax = "<div class=\"erreur\">Pas de creneau pour ce jour !.</div>";
 				}
 				else{
-					resultat_ajax = "Liste des créneaux .";
+					resultat_ajax = "<div class=\"creneau_exist\">Liste des créneaux :</div>";
 				} 
 		}catch( DAOException e ) {
 			resultat_ajax = "Échec de la connexion lors de la récupération des créneaux : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 			e.printStackTrace();
 		}
 		/* ------------------------- récuperation d'une session etchatgement de liste des médecins ----------------------------------------------------*/
-		  HttpSession session = request.getSession();
 		session.setAttribute(ATT_SESSION_RDV_CRENEAU, listecreneau);
 		response.setContentType("text/xml");
 	    response.setHeader("Cache-Control", "no-cache");
 	    response.getWriter().write(resultat_ajax);
 		}
-
+	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}

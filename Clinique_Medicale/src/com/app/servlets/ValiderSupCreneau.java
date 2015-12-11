@@ -26,18 +26,19 @@ import com.app.dao.DAOFactory;
 import com.app.dao.DocteurDao;
 import com.app.dao.RdvDao;
 
-public class ValiderRdvPatient extends HttpServlet {
+public class ValiderSupCreneau extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	public static final String ATT_USER = "docteur";
 	public static final String ATT_FORM = "form";
-	public static final String VUE_CONNECT = "/connexionPatient";
-	public static final String ATT_SESSION_USER = "sessionPatient";
+	public static final String VUE_CONNECT = "/connexionDocteur";
+	public static final String DATE_CRENEAU = "date";
+	public static final String ATT_SESSION_USER = "sessionDocteur";
 	public static final String ATT_SESSION_RDV_CRENEAU = "sessionCreneau";
 	public static final String ATT_SESSION_DOCTEUR_LISTE = "sessionDocteurListe";
 	public static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
 	public static final String FORMAT_DATE = "dd/MM/yyyy HH:mm:ss";
-	public static final String VUE = "/WEB-INF/validerRDV.jsp";
+	public static final String VUE = "/WEB-INF/validerSuppressionCreneau.jsp";
 	public static final String VUE_SUCCES = "/WEB-INF/afficherDocteur.jsp";
 	public static final String CONF_DAO_FACTORY= "daofactory";
 	public static final int COOKIE_MAX_AGE = 60 * 60 * 24 * 365; // 1 an
@@ -51,8 +52,6 @@ public class ValiderRdvPatient extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -60,20 +59,11 @@ public class ValiderRdvPatient extends HttpServlet {
 		if(session.getAttribute(ATT_SESSION_USER) == null){
 			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
 		}else{
-		Creneau creneauChoisi = null ;
-		ArrayList<Creneau> creneau = (ArrayList<Creneau>) session.getAttribute("sessionCreneau");
-		Long creneauId = Long.parseLong(request.getParameter("creneauId")) ;
-		for(int i=0;i < creneau.size(); i++){
-			if(creneau.get(i).getId() == creneauId){
-				creneauChoisi = creneau.get(i);
-			}
-		}
-		org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd");
-		String rev_date = creneauChoisi.getTime().toString(formatter);
-		Patient patient =(Patient) (session.getAttribute(ATT_SESSION_USER));
-		String id_patient = patient.getNum_assurance();
+			Long creneauId = Long.parseLong(request.getParameter("creneauId")) ;
+			Docteur docteur = (Docteur) session.getAttribute(ATT_SESSION_USER);
+			String date = (String) session.getAttribute(DATE_CRENEAU);
 		try {
-			rdvDao.updateRdv_patient(id_patient, creneauChoisi,rev_date);
+			rdvDao.supprimerCreneau(docteur.getIdentifiant(),creneauId,date);
 
 		}catch( DAOException e ) {
 			resultat_ajax = "Échec de la confirmation de rendez-vous : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";

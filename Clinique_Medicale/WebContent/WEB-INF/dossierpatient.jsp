@@ -9,17 +9,8 @@
     </head>
     <body>
     <c:import url="/inc/inc_patient_menu.jsp" />
-        <%--<div id="corps">
-            <p class="info">${ message }</p>
-                <p>Nom : <c:out value="${ sessionScope.sessionPatient.nom }"/></p>
-                <p>Prénom : <c:out value="${ sessionScope.sessionPatient.prenom }"/></p>
-                <p>Adresse : <c:out value="${ sessionScope.sessionPatient.adresse }"/></p>
-                <p>Numéro de téléphone : <c:out value="${ sessionScope.sessionPatient.telephone }"/></p>
-                <p>Email : <c:out value="${ sessionScope.sessionPatient.email }"/></p>
-                    <%-- Vérification de la présence d'un objet utilisateur en session --%>
-                <%--<c:if test="${!empty sessionScope.sessionPatient}">
-                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
-                <%--	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.sessionPatient.email}</p>  </c:if>--%> 
+    <fieldset>
+    <legend>Le dossier de patient: </legend>
           <div id="corps">
         <c:choose>
             <%-- Si aucun client n'existe en session, affichage d'un message par défaut. --%>
@@ -55,6 +46,7 @@
             </table>
             </c:otherwise>
         </c:choose>
-        </div>        
+        </div>  
+        </fieldset>     
     </body>
 </html>

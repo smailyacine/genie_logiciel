@@ -19,7 +19,7 @@ l'interface UtilisateurDao */
 	private static final String SQL_DELETE = "delete from docteur where id = ?";
 	private static final String SQL_SELECT_ID = "select identifiant, nom,prenom, adresse,telephone,email from docteur where identifiant = ?";
 	private static final String SQL_SELECT_EMAIL = "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ?";
-	private static final String SQL_SELECT_PASSE_EMAIL= "select identifiant, nom,prenom, adresse,telephone,email from docteur where email = ? and motDePasse = ?";
+	private static final String SQL_SELECT_PASSE_EMAIL= "select *from docteur where email = ? and motDePasse = ?";
 	private static final String SQL_SELECT = "select * from docteur";
 	private static final String SQL_SELECT_SPECIALITE = "select * from docteur where specialite = ?";
 

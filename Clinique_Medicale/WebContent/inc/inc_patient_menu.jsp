@@ -8,12 +8,17 @@
 </head>
 <body>
 <div class="menu_horizontal">
+<div id="image_banner">
+<img src="http://img11.hostingpics.net/pics/430031rszjinnahmedicalcollegepeshawarjmcpmeritlist2014mbbs.jpg"> 
+</div>
 <ul >
-<li><a href="http://localhost:8080/Clinique_Medicale/index"><img src="" alt="" />Acceiul</a></li>
-<li><a href="http://localhost:8080/Clinique_Medicale/listerconsultations"><img src="" alt="" />Consultations</a></li>
-<li><a href="http://localhost:8080/Clinique_Medicale/listerdocteurs"><img src="" alt="" />Liste des médcins</a></li>
-<li><a href="http://localhost:8080/Clinique_Medicale/recuperermedcins"><img src="" alt="" />Fixer un rendez-vous</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/index"><img src="" alt="" />Acceuil</a></li>
 <li><a href="http://localhost:8080/Clinique_Medicale/dossierpatient"><img src="" alt="" />Mon Dossier</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/recuperermedcins"><img src="" alt="" />Fixer un rendez-vous</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/voireRdv"><img src="" alt="" />Voir mes  Rendez-vous</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/listerdocteurs"><img src="" alt="" />Rechercher un Médecin</a></li>
+<li><a href="http://localhost:8080/Clinique_Medicale/listerconsultations"><img src="" alt="" />Voir mes consultation</a></li>
+<li><a href="#"><img src="" alt="" />Retour d'avis</a></li>
 <li><a href="http://localhost:8080/Clinique_Medicale/DeconnexionPatient"><img src="" alt=""/>Deconnexion</a></li>
 </ul>
 </div>

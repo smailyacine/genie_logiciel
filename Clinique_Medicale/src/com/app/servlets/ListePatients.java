@@ -19,11 +19,17 @@ public class ListePatients extends HttpServlet {
     public static final String ATT_FORM   = "form";
     public static final String ATT_SESSION_PATIENT = "patient";
     public static final String VUE = "/WEB-INF/listerPatients.jsp";
-
+    public static final String VUE_CONNECT = "/connexionPatient";
+	public static final String ATT_SESSION_USER = "sessionPatient";
 
     public void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
+    	HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null){
+			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
+		}else{
         /* À la réception d'une requête GET, simple affichage du formulaire */
         this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
+    }
     }
     
 }

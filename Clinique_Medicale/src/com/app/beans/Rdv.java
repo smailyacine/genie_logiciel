@@ -3,7 +3,7 @@ package com.app.beans;
 import org.joda.time.DateTime;
 
 public class Rdv {
-
+    private Long id;
 	private String nomPatient;
 	private String prenomPatient;
 	private String nomDocteur;
@@ -52,5 +52,11 @@ public class Rdv {
 	}
 	public void setTime(DateTime time) {
 		this.time = time;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

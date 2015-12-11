@@ -9,13 +9,16 @@
 </head>
 <body class = "news">
 <header>
+<div id="image_banner">
+<img src="http://img11.hostingpics.net/pics/430031rszjinnahmedicalcollegepeshawarjmcpmeritlist2014mbbs.jpg"> 
+</div>
 <div class="nav">
   <ul>
-    <li><a href=""> Accueil </a></li>
-    <li><a href="http://localhost:8080/Clinique_Medicale/connexionDocteur"> Accés Docteur </a></li>
-    <li><a href="http://localhost:8080/Clinique_Medicale/connexionPatient">Accés Patient </a></li>
+    <li><a href=""> Accueil</a></li>
+    <li><a href="http://localhost:8080/Clinique_Medicale/connexionDocteur"> login Médecin </a></li>
+    <li><a href="http://localhost:8080/Clinique_Medicale/connexionPatient">login Patient </a></li>
     <li><a href=""> Administrateur </a></li>  
-    <li><a href="http://localhost:8080/Clinique_Medicale/creationPatient"> S'inscrire Patient </a></li>
+    <li><a href="http://localhost:8080/Clinique_Medicale/creationPatient"> Nouveau Patient</a></li>
 
   </ul>
   </div>

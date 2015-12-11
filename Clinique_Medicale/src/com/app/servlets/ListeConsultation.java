@@ -29,6 +29,7 @@ public class ListeConsultation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String ATT_USER = "docteur";
 	public static final String ATT_FORM = "form";
+    public static final String VUE_CONNECT = "/connexionPatient";
 	public static final String ATT_SESSION_RESULTAT = "resultat_liste_docteur";
 	public static final String ATT_CONSULTATION_LISTE = "consultationListe";
 	public static final String ATT_CONSULTATION_FORM = "consultationForm";
@@ -46,9 +47,11 @@ public class ListeConsultation extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	/* --------------------------------        récupérer la liste des consltations     ------------------------------------------------------------*/
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null){
+			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
+		}else{	
 	ArrayList<Consultation> consultationListe =  new ArrayList<Consultation>();
-	HttpSession session = request.getSession();
 	Patient patient = (Patient) session.getAttribute(ATT_SESSION_USER);
 	ConsultationMetiers consultationForm = new ConsultationMetiers(consultationDao,docteurDao);
 	consultationListe = consultationForm.consultationPatient(patient);
@@ -60,6 +63,7 @@ public class ListeConsultation extends HttpServlet {
 	session.setAttribute( ATT_CONSULTATION_FORM,consultationForm );
 	
 	this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

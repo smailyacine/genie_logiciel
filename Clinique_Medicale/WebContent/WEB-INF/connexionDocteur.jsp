@@ -8,6 +8,7 @@
 	href="<c:url value="/inc/style.css"/>" />
 </head>
 <body>
+<c:import url="/inc/inc_docteur_menu.jsp" />
 	<c:if test="${empty sessionScope.sessionDocteur }">
 		<form method="post" action="<c:url value="/connexionDocteur" />">
 			<fieldset>

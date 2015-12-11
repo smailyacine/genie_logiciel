@@ -14,7 +14,7 @@ import com.app.beans.Patient;
 import com.app.dao.DAOException;
 import com.app.dao.DAOFactory;
 import com.app.dao.PatientDao;
-public class PrechargeFilter implements Filter {
+public class EnterFilter implements Filter {
 	
 public static final String ATT_SESSION_CLIENTS = "clients";
 public static final String CONF_DAO_FACTORY= "daofactory";
@@ -35,19 +35,11 @@ ServletException {
 Patient patient = new Patient();
 HttpSession session = ((HttpServletRequest) req).getSession();
 
-if(getCookieValue(req,COOKIE_ID_USER) != null){
-	try{
-		patient= patientDao.trouverSecurite(getCookieValue(req,COOKIE_ID_USER));
-	}catch ( DAOException e ) {
-		//resultat = "Échec de la connexion du médecin : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
-		e.printStackTrace();
-	}
-	session.setAttribute(ATT_SESSION_USER, patient);
+if(getCookieValue(req,COOKIE_ID_USER) != null && session.getAttribute(ATT_SESSION_USER) != null){
 	chain.doFilter( req, res );
 }
 else{
-	req.getRequestDispatcher( VUE_CONNEXION ).forward(
-			req, res );
+	req.getRequestDispatcher( VUE_CONNEXION ).forward(req, res );
 }
 	
 /* Pour terminer, poursuite de la requête en cours */

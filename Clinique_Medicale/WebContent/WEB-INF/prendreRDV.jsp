@@ -5,6 +5,8 @@
 <head>
 <meta charset="utf-8" />
 <title>Connexion</title>
+<link type="text/css" rel="stylesheet"
+	href="<c:url value="/inc/style.css"/>" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
 
@@ -17,6 +19,7 @@ function ChoisirDocteur(id) {
   xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
+    	
     	document.getElementById("test").innerHTML = xhttp.responseText;
     }
   };
@@ -90,7 +93,7 @@ function checkDisponibilite(){
 		  xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
 		    if (xhttp.readyState == 4 && xhttp.status == 200) {
-		    	document.getElementById("test3").innerHTML = xhttp.responseText;
+		    	document.getElementById("listeCreneaux").innerHTML = xhttp.responseText;
 		    	loadjsp();
 		    	//var table = document.getElementById("creneau");
 		    	//table.style.visibility = 'visible';
@@ -101,12 +104,17 @@ function checkDisponibilite(){
 	}
 }
 function loadjsp(){
-	$("#test4").load("tableCreneaux.jsp");
+	var tableCreneau = document.getElementById("tableCreneaux");
+	tableCreneau.style.visibility = 'visible';
+	$("#tableCreneaux").load("tableCreneaux.jsp");
 }
 	
 </script>
 </head>
+<c:import url="/inc/inc_patient_menu.jsp" />
+<div id="form_rdv">
 <form name="formeSpecialite">
+<div class= "select_prendre_rdv">
 	<select name="specilaites" id="specilaites"size="1"
 		onchange="ChoisirDocteur(this.options[this.selectedIndex].value)">
 		<option value="1" >Veiullez choisir une
@@ -130,12 +138,13 @@ function loadjsp(){
 		<option value="Cardiologie">Cardiologie</option>
 
 	</select>
-
 	<p id="test">Merci de choisir une specilaite dans la liste
 		dérouante</p>
-	<p id="test2"></p>
+</div>
 
 	<!-- Month dropdown -->
+	<div class= "select_prendre_rdv">
+	<p id="test2"></p>
 	<select name="month" id="month" onchange="" size="1"
 		style="visibility: hidden">
 		<option value="1">selecionner un mois</option>
@@ -152,6 +161,7 @@ function loadjsp(){
 		<option value="11">November</option>
 		<option value="12">December</option>
 	</select>
+	
 
 	<!-- Day dropdown -->
 	<select name="day" id="day" onchange="" size="1"
@@ -188,7 +198,8 @@ function loadjsp(){
 		<option value="29">29</option>
 		<option value="30">30</option>
 		<option value="31">31</option>
-	</select> <select name="year" id="year" onchange="" size="1"
+	</select>
+	 <select name="year" id="year" onchange="" size="1"
 		style="visibility: hidden">
 		<option value="1">selecionner une anneé</option>
 		<option value="2015">2015</option>
@@ -196,10 +207,15 @@ function loadjsp(){
 		<option value="2017">2017</option>
 		<option value="2018">2018</option>
 		<option value="2019">2019</option>
-	</select> <input type="button" id="submit" value="verifier la disponibilité" style="visibility: hidden" onclick="checkDisponibilite()">
+	</select> 
+	</div>
+	<div class= "select_prendre_rdv">
+	
+	<input type="button" id="submit" value="verifier la disponibilité" style="visibility: hidden" onclick="checkDisponibilite()">
+	</div>
 </form>	
-	<p id ="test3"></p>
-	<div id = "test4"></div>
-
+	<div id ="listeCreneaux"></div>
+	<div id = "tableCreneaux" style="visibility: hidden"></div>
+	</div>
 </body>
 </html>

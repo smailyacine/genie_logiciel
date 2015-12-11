@@ -27,6 +27,8 @@ public class ListeDocteur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String ATT_USER = "docteur";
 	public static final String ATT_FORM = "form";
+    public static final String VUE_CONNECT = "/connexionPatient";
+	public static final String ATT_SESSION_USER = "sessionPatient";
 	public static final String ATT_SESSION_RESULTAT = "resultat_liste_docteur";
 	public static final String ATT_SESSION_DOCTEUR_LISTE = "sessionDocteurListe";
 	public static final String COOKIE_DERNIERE_CONNEXION = "derniereConnexion";
@@ -45,7 +47,10 @@ public class ListeDocteur extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	/* --------------------------------        récupérer la liste des médecins     ------------------------------------------------------------*/
-		
+		HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null){
+			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
+		}else{
 	ArrayList<Docteur> listedocteur =  new ArrayList<Docteur>();
 	
 	try {
@@ -60,14 +65,14 @@ public class ListeDocteur extends HttpServlet {
 		resultat_liste_docteur = "Échec de la connexion lors de la récupération de liste des médecins : une erreur imprévue est survenue, merci de réessayer dans quelques instants.";
 		e.printStackTrace();
 	}
-	
+		
 	/* ------------------------- récuperation d'une session etchatgement de liste des médecins ----------------------------------------------------*/
 	
-	HttpSession session = request.getSession();
 	session.setAttribute(ATT_SESSION_DOCTEUR_LISTE, listedocteur);
 	session.setAttribute(ATT_SESSION_RESULTAT,resultat_liste_docteur );
 	
 	this.getServletContext().getRequestDispatcher(VUE).forward(request, response);
+	}
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

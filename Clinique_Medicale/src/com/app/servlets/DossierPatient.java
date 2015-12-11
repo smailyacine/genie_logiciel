@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 public class DossierPatient extends HttpServlet {
 	public static final String ATT_SESSION_USER = "sessionPatient";
+	public static final String VUE_CONNECT = "/connexionPatient";
 	public static final String COOKIE_ID_USER = "idpatient";
     public static final String VUE_DOSSIER   = "/WEB-INF/dossierpatient.jsp";
     public static final String VUE_CONNEXION   = "/WEB-INF/dossierpatient.jsp";
@@ -21,6 +22,9 @@ public class DossierPatient extends HttpServlet {
         /* À la réception d'une requête GET, simple affichage du formulaire */
     	String idpatient = getCookieValue(request, COOKIE_ID_USER);
     	HttpSession session = request.getSession();
+		if(session.getAttribute(ATT_SESSION_USER) == null){
+			response.sendRedirect( request.getContextPath() + VUE_CONNECT );
+		}else{
     	if (idpatient != null || session.getAttribute(ATT_SESSION_USER) != null ) {
     		this.getServletContext().getRequestDispatcher( VUE_DOSSIER  ).forward( request, response );
     	}
@@ -29,7 +33,7 @@ public class DossierPatient extends HttpServlet {
     	}
     	
     }
-    
+    }
     public void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException {
         
     }

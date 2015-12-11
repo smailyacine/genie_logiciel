@@ -13,6 +13,7 @@ import com.app.beans.Consultation;
 import com.app.beans.Creneau;
 import com.app.beans.Docteur;
 import com.app.beans.Patient;
+import com.app.beans.Rdv;
 
 public class DAOUtilitaire {
 	public static PreparedStatement initialisationRequetePreparee(
@@ -89,6 +90,20 @@ public class DAOUtilitaire {
 		creneau.setTime(new DateTime(resultSet.getTimestamp("rdvTime")));
 		return creneau;
 	}
+	
+	static Rdv map_rdv(ResultSet resultSet) throws SQLException{
+		Rdv rdv = new Rdv();
+		rdv.setId(resultSet.getLong("R.id"));
+		rdv.setNomDocteur(resultSet.getString("D.nom"));
+		rdv.setPrenomDocteur(resultSet.getString("D.prenom"));
+		rdv.setNomPatient(resultSet.getString("P.nom"));
+		rdv.setPrenomPatient(resultSet.getString("P.prenom"));
+		rdv.setSpecialite(resultSet.getString("D.specialite"));
+		rdv.setTime(new DateTime(resultSet.getTimestamp("rdvTime")));
+		rdv.setCreneau(resultSet.getString("interval"));
+		return rdv;
+	}
+	
 	
 
 	/* Fermeture silencieuse du resultset */

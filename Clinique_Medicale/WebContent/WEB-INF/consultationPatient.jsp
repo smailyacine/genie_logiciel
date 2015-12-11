@@ -11,6 +11,8 @@
 <body>
 	<c:import url="/inc/inc_patient_menu.jsp" />
 	<br>
+	<fieldset>
+	<legend>La liste des consultations: </legend>
 	<c:choose>
 		<c:when test="${ empty sessionScope.consultationListe }">
 			<p class="erreur">Aucun consultation trouvée.</p>
@@ -43,5 +45,6 @@
 			</table>
 		</c:otherwise>
 	</c:choose>
+	</fieldset>
 </body>
 </html>

@@ -1,13 +1,23 @@
 /* Général ------------------------------------------------------------------------------------- */
+html { 
+  background: url("http://www.agoraclinic.co.uk/wp-content/themes/agora/background.jpg") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
 
-body, p, legend, label, input {
+p, legend, label, input {
     font: normal 8pt verdana, helvetica, sans-serif;
+}
+body{
+	 font: normal 8pt verdana, helvetica, sans-serif;
 }
 
 /* Forms --------------------------------------------------------------------------------------- */
 fieldset {
     padding: 10px;
-    border: 1px #0568CD solid;
+    border: 2px black solid;
     margin: 10px;
 }
 
@@ -199,7 +209,7 @@ td{
  
 @media screen and (min-width: 600px) {
   .menu_horizontal li {
-    width: 120px;
+    width: 160px;
     border-bottom: none;
     height: 50px;
     line-height: 50px;
@@ -212,4 +222,53 @@ td{
     margin-right: -4px;
   }
  
- 
+ .select_prendre_rdv select{
+background: transparent;
+   width: 268px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   border-radius: 0;
+   height: 34px;
+   -webkit-appearance: none;
+ }
+ .select_prendre_rdv {
+ text-align: center;
+ }
+  .select_prendre_rdv input  {
+margin: 50px;
+ }
+
+#tableCreneaux{
+	font-size: 1.8em;
+}
+.creneau_exist{
+	
+	font-size: 2em;
+	text-align: center;
+	padding: 2px;
+
+	
+}
+#listeCreneaux{
+	padding: 20px;
+}
+#tableCreneaux{
+	text-align: center;
+}
+#creneau table{
+	margin: 0px auto;  
+}
+#form_rdv{
+	padding: 10px;
+	margin: 10px;
+border: 2px solid black;
+}
+
+#image_banner img{
+    height: auto; 
+    width: auto; 
+    max-width: 1340px; 
+    max-height: 300px;
+}

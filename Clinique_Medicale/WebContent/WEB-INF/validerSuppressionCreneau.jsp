@@ -9,8 +9,8 @@
 	href="<c:url value="/inc/style.css"/>" />
 </head>
 <body>
-<c:import url="/inc/inc_patient_menu.jsp" />
+<c:import url="/inc/inc_docteur_menu.jsp" />
 
-Le rendez-vous est bien été validé.
+<p>Le créneau est supprimé de votre emploi du temps.</p>
 </body>
 </html>
